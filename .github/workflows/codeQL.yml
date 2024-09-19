@@ -13,6 +13,12 @@ jobs:
       security-events: write
       actions: read
       contents: read
+    analyze:
+      name: Analyze
+      strategy:
+        fail-fast: false
+        matrix:
+          language: ['javascript', 'python']
 
     steps:
       - name: Checkout repository
@@ -20,10 +26,8 @@ jobs:
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
-        strategy:
-          fail-fast: false
-          matrix:
-            language: ['javascript', 'python']
+        with:
+          languages: python
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
